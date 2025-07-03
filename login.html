@@ -35,12 +35,6 @@
       margin-bottom: 10px;
     }
 
-    .login-subtitle {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 30px;
-    }
-
     .btn-primary {
       background-color: #003366;
       border-color: #003366;
@@ -64,13 +58,6 @@
       font-size: 40px;
       color: #003366;
     }
-
-    .disclaimer {
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
@@ -78,20 +65,19 @@
   <div class="login-card">
     <div class="logo">
       <i class="fas fa-university"></i>
-    </div>
+    </div>  
     <h2 class="text-center login-title">SAFE SAW INTERNATIONAL</h2>
-   
 
-    <!-- ❌ Intentionally vulnerable login form (no frontend validation) -->
-    <form action="login.php" method="POST">
+    <!-- ✅ JS-based Login (no PHP) -->
+    <form id="loginForm">
       <div class="mb-3">
         <label class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" placeholder="Enter your username">
+        <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Enter your password">
+        <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
       </div>
 
       <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
@@ -102,9 +88,24 @@
         <a href="register.html" class="text-decoration-none ms-2">Register</a>
       </div>
     </form>
-
-  
   </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = e.target.username.value.trim();
+      const password = e.target.password.value.trim();
+
+      // ✅ Demo credentials
+      if (username === 'admin' && password === 'admin') {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'home.html';
+      } else {
+        alert('❌ Invalid credentials (Hint: admin / admin)');
+      }
+    });
+  </script>
 
 </body>
 </html>
