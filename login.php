@@ -43,7 +43,7 @@ if ($result && $result->num_rows >= 1) {
     if ($row['role'] === 'admin') {
         header("Location: admin_dashboard.php");
     } else {
-        header("Location: index.html");
+        header("Location: home.html");
     }
     exit();
 } else {
